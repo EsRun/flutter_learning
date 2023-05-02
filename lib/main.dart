@@ -8,15 +8,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  // DropDownMenu 추가 에러 원인 확인 필요
+  
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return MaterialApp(
       //Container(width: 50, height: 50, color: Colors.blue)
       home: Scaffold(
-        //appBar: AppBar(title: Text("flutter App")),
+        appBar: AppBar(title: Text("flutter App")),
         body: Align(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           child: Container(
             height: double.infinity, width: double.infinity,
             padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
