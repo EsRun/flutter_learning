@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,9 +8,14 @@ const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  final fcmToken = await FirebaseMessaging.instance.getToken(vapidKey: "BHPVYeBEa9xA6Hf8Tcj796tnUsdj9Ybet1vXzdDg_ILgCDDiWOexLuCd5Uiei2XWoRPdf7ACaEVi_KcygxaoHCk");
   runApp(const MyApp());
 }
 
@@ -78,4 +84,9 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
       }).toList(),
     );
   }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
 }
