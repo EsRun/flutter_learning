@@ -15,7 +15,8 @@ void main() async{
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  final fcmToken = await FirebaseMessaging.instance.getToken(vapidKey: "BHPVYeBEa9xA6Hf8Tcj796tnUsdj9Ybet1vXzdDg_ILgCDDiWOexLuCd5Uiei2XWoRPdf7ACaEVi_KcygxaoHCk");
+  //final fcmToken = await FirebaseMessaging.instance.getToken(vapidKey: "BHPVYeBEa9xA6Hf8Tcj796tnUsdj9Ybet1vXzdDg_ILgCDDiWOexLuCd5Uiei2XWoRPdf7ACaEVi_KcygxaoHCk");
+  //print("token : ${fcmToken ?? 'token NULL!'}");
   runApp(const MyApp());
 }
 
@@ -88,5 +89,5 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print("Handling a background message: ${message.messageId}");
+  print("Handling a background message: ${message.data.entries}");
 }
